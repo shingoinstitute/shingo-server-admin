@@ -1,3 +1,3 @@
 # shingo-server-admin
 
-a [Sails](http://sailsjs.org) application
+A web application to administrate our running web applications.
