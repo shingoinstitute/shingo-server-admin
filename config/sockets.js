@@ -10,6 +10,9 @@
  * http://sailsjs.org/#!/documentation/reference/sails.config/sails.config.sockets.html
  */
 
+// var passportSocketIo = require("passport.socketio");
+// var cookieParser = require('cookie-parser');
+
 module.exports.sockets = {
 
 
@@ -108,8 +111,17 @@ module.exports.sockets = {
   ***************************************************************************/
   // beforeConnect: function(handshake, cb) {
   //   // `true` allows the connection
+  //   var redisStore = require('connect-redis')(sails.session);
+  //   var store = new redisStore();
+  //   sails.log.debug("Handshake: ", handshake);
+  //   sails.io.use(passportSocketIo.authorize({
+  //     cookieParser: cookieParser,
+  //     key: 'sails.sid',
+  //     secret: '3991ace95ebc9a043f8beaabbc7f7e6f',
+  //     store: store
+  //   }));
   //   return cb(null, true);
-  //
+  
   //   // (`false` would reject the connection)
   // },
 
@@ -137,5 +149,20 @@ module.exports.sockets = {
   *                                                                          *
   ***************************************************************************/
   // transports: ["polling", "websocket"]
+
+  /***************************************************************************
+  *                                                                          *
+  * `authorization`                                                          *
+  *                                                                          *
+  * Authorize a socket connection.                                           *
+  *                                                                          *
+  ***************************************************************************/
+
+  // authorization: function(req, cb){
+  //   if(req.session && res.session.authorized){
+  //     return cb(null, true);
+  //   }
+  //   return cb({message: "Session is not authorized.", session: req.session}, false);
+  // }
 
 };

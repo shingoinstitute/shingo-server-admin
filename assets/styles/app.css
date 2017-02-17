@@ -1,0 +1,26 @@
+.info {
+    color: forestgreen;
+}
+
+.debug {
+    color: cadetblue;
+}
+
+.error {
+    color: darkred;
+}
+
+.data {
+    white-space: pre;
+    font-family: monospace;
+    color: white;
+}
+
+.console {
+    padding: 10px;
+    border: 2px solid darkgrey;
+    background: black;
+    max-height: 800px;
+    overflow: hidden;
+    overflow-y: auto;
+}

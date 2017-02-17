@@ -28,6 +28,13 @@ module.exports = function(grunt) {
         cwd: './assets',
         src: ['**/*.!(coffee|less)'],
         dest: '.tmp/public'
+      },
+      {
+        expand:true,
+        cwd: './',
+        src: ['node_modules/angular-uuid/**/*'],
+        dest: '.tmp/public/bower_components/angular-uuid',
+        flatten: true
       }]
     },
     build: {

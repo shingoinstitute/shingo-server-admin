@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%=typeof title == 'undefined' ? 'New Sails App' : title%></title>
+    <title>Shingo Server Admin</title>
 
     <!-- Viewport mobile tag for sensible mobile support -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -29,11 +29,13 @@
     -->
 
     <!--STYLES-->
+    <link rel="stylesheet" href="/styles/app.css">
+    <link rel="stylesheet" href="/styles/importer.css">
     <!--STYLES END-->
   </head>
 
-  <body>
-    <%- body %>
+  <body ng-app="core">
+    <div ng-view><!-- Views are inserted here --></div>
 
 
 
@@ -59,6 +61,7 @@
     -->
 
     <!--TEMPLATES-->
+    <script type="text/javascript" src="/jst.js"></script>
     <!--TEMPLATES END-->
 
 
@@ -85,7 +88,17 @@
 
     -->
 
+    <script src="/js/dependencies/sails.io.js"
+      environment="development"
+      headers='{ "x-csrf-token": "<%= typeof _csrf !== 'undefined' ? _csrf : '' %>" }'
+    ></script>
+
     <!--SCRIPTS-->
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-route/angular-route.js"></script>
+    <script src="/bower_components/angular-scroll-glue/src/scrollglue.js"></script>
+    <script src="/js/frontend/app.js"></script>
     <!--SCRIPTS END-->
+    <script src="/bower_components/angular-uuid/angular-uuid.js"></script>
   </body>
 </html>

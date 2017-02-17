@@ -8,7 +8,8 @@
  * For more information on configuration, check out:
  * http://sailsjs.org/#!/documentation/reference/sails.config/sails.config.http.html
  */
-
+var passport = require('passport');
+var ForceDotComStrategy = require('passport-forcedotcom').Strategy;
 module.exports.http = {
 
   /****************************************************************************
@@ -29,24 +30,48 @@ module.exports.http = {
   * router is invoked by the "router" middleware below.)                     *
   *                                                                          *
   ***************************************************************************/
+    passportInit: passport.initialize(),
+    passportSession: passport.session(),
 
-    // order: [
-    //   'startRequestTimer',
-    //   'cookieParser',
-    //   'session',
-    //   'myRequestLogger',
-    //   'bodyParser',
-    //   'handleBodyParserError',
-    //   'compress',
-    //   'methodOverride',
-    //   'poweredBy',
-    //   '$custom',
-    //   'router',
-    //   'www',
-    //   'favicon',
-    //   '404',
-    //   '500'
-    // ],
+    order: [
+      'startRequestTimer',
+      'cookieParser',
+      'session',
+      'myRequestLogger',
+      'bodyParser',
+      'forcedotcom',
+      'passportInit',
+      'passportSession',
+      'handleBodyParserError',
+      'compress',
+      'methodOverride',
+      'poweredBy',
+      '$custom',
+      'router',
+      'www',
+      'favicon',
+      '404',
+      '500'
+    ],
+
+    forcedotcom: function(req,res,next){
+      passport.use(new ForceDotComStrategy(
+        sails.config.passport.forcedotcom.options,
+        function(token, tokenSecret, profile, done){
+          return done(null, profile);
+        }
+      ));
+      next();
+
+      //define REST proxy options based on logged in user
+      passport.serializeUser(function(user, done) {
+        done(null, user);
+      });
+
+      passport.deserializeUser(function(obj, done) {
+        done(null, obj);
+      });
+    }
 
   /****************************************************************************
   *                                                                           *

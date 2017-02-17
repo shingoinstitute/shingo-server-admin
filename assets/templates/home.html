@@ -1,0 +1,17 @@
+<div ng-controller="HomeController as vm">
+    <h1>Server Logs</h1>
+    <ul>
+        <li ng-repeat="server in vm.servers">
+            {{server.uid}} - started: {{server.ctime | date : 'medium' : 'UTC'}}
+            <button ng-click="vm.stop(server.uid)">Stop</button>
+            <button ng-click="vm.restart(server.uid)">Restart</button>
+            <button ng-click="vm.nuke(server.uid)">Nuke</button>
+        </li>
+    </ul>
+    <br>
+    <div class="console" scroll-glue ng-repeat="server in vm.servers">
+        <span class="data" ng-repeat="log in vm.logs[server.uid]">{{log.timestamp}} - <span class="{{log.level}}">{{log.level}}: </span> {{log.message}} {{log.stack}}<br></span>
+        <hr>
+    </div>
+    <pre>{{vm.servers[0] | json}}</pre>
+</div>
