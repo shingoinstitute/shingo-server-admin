@@ -1,13 +1,36 @@
-.info {
-    color: forestgreen;
+/* npm log colors */
+.silly {
+    color: hotpink;
 }
 
 .debug {
     color: cadetblue;
 }
 
+.verbose {
+    color: mediumpurple;
+}
+
+.info {
+    color: forestgreen;
+}
+
+.warn {
+    color: darkgoldenrod;
+}
+
 .error {
     color: darkred;
+}
+
+/* Console Settings */
+.console {
+    padding: 10px;
+    border: 2px solid darkgrey;
+    background: black;
+    max-height: 400px;
+    overflow: hidden;
+    overflow-y: auto;
 }
 
 .data {
@@ -16,6 +39,7 @@
     color: white;
 }
 
+/* Misc. */
 md-tabs {
     height: 100%;
 }
@@ -26,6 +50,7 @@ md-tabs {
     font-weight: bolder;
 }
 
+/* Loading bar */
 .container {
   display: block;
   position: relative;
@@ -47,6 +72,8 @@ md-tabs {
   padding: 25px;
   font-size: 0.9em; }
 
+
+/* Replicate text-decoration: blink in CSS3 */
 @keyframes blink {  
   0% { opacity: 1.0; }
   50% { opacity: 0.0; }
@@ -57,16 +84,8 @@ md-tabs {
   50% { opacity: 0.0; }
   100% { opacity: 1.0; }
 }
+
 .blink {
   animation: blink 1s step-start 0s infinite;
   -webkit-animation: blink 1s step-start 0s infinite;
 } 
-
-.console {
-    padding: 10px;
-    border: 2px solid darkgrey;
-    background: black;
-    max-height: 400px;
-    overflow: hidden;
-    overflow-y: auto;
-}
