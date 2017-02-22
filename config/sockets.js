@@ -150,19 +150,4 @@ module.exports.sockets = {
   ***************************************************************************/
   // transports: ["polling", "websocket"]
 
-  /***************************************************************************
-  *                                                                          *
-  * `authorization`                                                          *
-  *                                                                          *
-  * Authorize a socket connection.                                           *
-  *                                                                          *
-  ***************************************************************************/
-
-  // authorization: function(req, cb){
-  //   if(req.session && res.session.authorized){
-  //     return cb(null, true);
-  //   }
-  //   return cb({message: "Session is not authorized.", session: req.session}, false);
-  // }
-
 };

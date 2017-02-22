@@ -16,11 +16,57 @@
     color: white;
 }
 
+md-tabs {
+    height: 100%;
+}
+
+.nuke {
+    background: black !important;
+    color: red !important;
+    font-weight: bolder;
+}
+
+.container {
+  display: block;
+  position: relative;
+  width: 100%;
+  border: 2px solid #aad1f9;
+  transition: opacity  0.1s linear;
+  border-top: 0px; }
+
+.bottom-block {
+  display: block;
+  position: relative;
+  background-color: rgba(255, 235, 169, 0.25);
+  height: 85px;
+  width: 100%; }
+
+.bottom-block > span {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 25px;
+  font-size: 0.9em; }
+
+@keyframes blink {  
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+}
+@-webkit-keyframes blink {
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+}
+.blink {
+  animation: blink 1s step-start 0s infinite;
+  -webkit-animation: blink 1s step-start 0s infinite;
+} 
+
 .console {
     padding: 10px;
     border: 2px solid darkgrey;
     background: black;
-    max-height: 800px;
+    max-height: 400px;
     overflow: hidden;
     overflow-y: auto;
 }

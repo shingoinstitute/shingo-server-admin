@@ -1,17 +1,66 @@
-<div ng-controller="HomeController as vm">
-    <h1>Server Logs</h1>
-    <ul>
-        <li ng-repeat="server in vm.servers">
-            {{server.uid}} - started: {{server.ctime | date : 'medium' : 'UTC'}}
-            <button ng-click="vm.stop(server.uid)">Stop</button>
-            <button ng-click="vm.restart(server.uid)">Restart</button>
-            <button ng-click="vm.nuke(server.uid)">Nuke</button>
-        </li>
-    </ul>
-    <br>
-    <div class="console" scroll-glue ng-repeat="server in vm.servers">
-        <span class="data" ng-repeat="log in vm.logs[server.uid]">{{log.timestamp}} - <span class="{{log.level}}">{{log.level}}: </span> {{log.message}} {{log.stack}}<br></span>
-        <hr>
-    </div>
-    <pre>{{vm.servers[0] | json}}</pre>
+<div ng-controller="HomeController as vm" layout-fill>
+  <md-content layout-padding layout-fill>
+    <md-tabs md-selected="0" md-border-bottom>
+      <md-tab ng-repeat="server in vm.servers" label="{{server.uid}}">
+        <md-card>
+          <md-card-header md-colors="{'background': 'accent'}">
+              <md-card-header-text>Server UID: {{server.uid}}</md-card-header-text>
+          </md-card-header>
+          <md-card-content>
+              <div layout-gt-md="row">
+                  <div flex="30">
+              <h3>Details</h3>
+            <span class="data" style="font-family: monospace; color: black;"><b>Started:</b>          {{server.ctime | date : 'medium' : 'UTC'}}
+<b>Command:</b>          '{{server.command}}'
+<b>Restarts:</b>         {{server.restarts}}
+<b>Running:</b>          {{server.running}}
+<b>Environment:</b>      '{{server.env}}'
+<b>Source Directory:</b> '{{server.sourceDir}}'
+<b>Script:</b>           '{{server.file}}'
+            </span>
+                  </div>
+            <span flex="5"><!-- spacer --></span>
+            <div flex>
+                <h3>Environment Variables:</h3>
+<div style="height: 200px; overflow-y: auto">
+<span class="data" style="font-family: monospace; color: black;" ng-repeat="k in server.spawnWith.env | keys"><b>{{k}}</b>={{server.spawnWith.env[k]}}
+</span>
+</div>
+            </div>
+</span>
+              </div>
+          </md-card-content>
+          <md-card-actions layout="row" layout-align="center center">
+            <md-button class="info" ng-click="vm.restart(server.uid)">Restart</md-button>
+            <md-button class="error" ng-click="vm.stop(server.uid)">Stop</md-button>
+            <md-button class="md-raised nuke" ng-click="vm.nuke(server.uid)"><span class="blink">Nuke</span></md-button>
+          </md-card-actions>
+        </md-card>
+        <div class="container" ng-show="vm.loadingLogs[s.uid]">
+          <md-progress-linear md-mode="query"></md-progress-linear>
+          <div class="bottom-block">
+            <span>Loading server logs...</span>
+          </div>
+        </div>
+        <div layout-gt-md="row">
+            <div layout="column" flex-gt-md="50">
+                <h4>{{server.uid}}'s Logs</h4>
+                <div class="console" scroll-glue>
+                    <span class="data" ng-repeat="log in vm.logs[server.uid]">{{log.timestamp}} - <span class="{{log.level}}">{{log.level}}: </span>    {{log.message}} {{log.stack}}<br></span>
+                </div>
+            </div>
+            <span flex="5"><!-- spacer --></span>
+            <div layout="column" flex>
+                <h4>Admin Log</h4>
+                <div class="console" scroll-glue force-glue>
+                    <span class="data" ng-repeat="log in vm.adminLog">{{log.timestamp}} - <span class="{{log.level}}">{{log.level}}: </span>    {{log.message}} {{log.stack}}<br></span>          
+                    <div class="float-bottom-right" layout-align="end center">
+                        <md-button class="md-fab md-mini secondary" ng-click="vm.clearAdmin()">X<md-tooltip>Clear Admin Log</md-tooltip></md-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </md-tab>
+    </md-tabs>
+  </md-content>
 </div>

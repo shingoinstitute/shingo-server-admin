@@ -17,6 +17,7 @@
 // (if you're using LESS with the built-in default config, you'll want
 //  to change `assets/styles/importer.less` instead.)
 var cssFilesToInject = [
+  'bower_components/angular-material/angular-material.css',
   'styles/**/*.css'
 ];
 
@@ -25,9 +26,15 @@ var cssFilesToInject = [
 // (uses Grunt-style wildcard/glob/splat expressions)
 var jsFilesToInject = [
   // Dependencies like jQuery, or Angular are brought in here
+  'bower_components/lodash/dist/lodash.js',
   'bower_components/angular/angular.js',
   'bower_components/angular-route/angular-route.js',
+  'bower_components/angular-material/angular-material.js',
+  'bower_components/angular-animate/angular-animate.js',
+  'bower_components/angular-aria/angular-aria.js',
+  'bower_components/angular-messages/angular-messages.js',
   'bower_components/angular-scroll-glue/src/scrollglue.js',
+  'bower_components/angular-lodash/angular-lodash.js',
 
   // All of the rest of your client-side js files
   // will be injected here in no particular order.

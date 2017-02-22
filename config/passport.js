@@ -23,7 +23,8 @@ module.exports.passport = {
       clientSecret: process.env.SF_SECRET,
       callbackURL: process.env.SF_CALLBACK,
       authorizationURL: process.env.SF_ENV + '/services/oauth2/authorize',
-      tokenURL: process.env.SF_ENV + '/services/oauth2/token'
+      tokenURL: process.env.SF_ENV + '/services/oauth2/token',
+      scope: ['id']
     }
   }
 

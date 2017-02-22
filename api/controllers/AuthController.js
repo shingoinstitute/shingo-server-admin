@@ -9,14 +9,12 @@ var passport = require('passport');
 
 module.exports = {	
 
-
   /**
    * `AuthController.login()`
    */
   login: function (req, res, next) {
     passport.authenticate('forcedotcom')(req, res, next);
   },
-
 
   /**
    * `AuthController.logout()`
@@ -27,7 +25,6 @@ module.exports = {
     return res.redirect('/login');
   },
 
-
   /**
    * `AuthController.auth_callback()`
    */
@@ -37,6 +34,7 @@ module.exports = {
         sails.log.error('SF Callback Error: ', err);
         return res.negotiate(err);
       }
+
       req.session.user = user;
       req.session.authenticated = user._raw.asserted_user;
       return res.redirect('/');
