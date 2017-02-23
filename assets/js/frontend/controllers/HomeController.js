@@ -1,10 +1,10 @@
 (function () {
   'use strict';
 
-  angular.module('core')
-    .controller('HomeController', ['$scope', '$http', 'io', 'uuid', 'servers', 'logs', '_', HomeController]);
+  angular.module('ui')
+    .controller('HomeController', ['$scope', '$rootScope', '$http', 'io', 'uuid', 'servers', 'logs', '_', HomeController]);
 
-  function HomeController($scope, $http, io, uuid, servers, logs) {
+  function HomeController($scope, $rootScope, $http, io, uuid, servers, logs) {
     var Log = function (jsonString) {
       var obj = JSON.parse(jsonString);
       this.timestamp = obj.timestamp;
@@ -31,7 +31,7 @@
 
     // Load forever servers that are running
     vm.loadServers = function () {
-      return servers.getAll()
+      return servers.list()
         .then(function (data) {
           vm.servers = data;
           vm.servers.forEach(function (s) {
@@ -76,8 +76,7 @@
     vm.restart = function (uid) {
       servers.restart(uid)
         .then(function () {
-
-          vm.loadServers();
+          console.log("Server " + uid + " restarted.");
         })
         .catch(function (err) {
           console.error("ERROR: ", err);
@@ -90,11 +89,21 @@
     vm.nuke = function (uid) {
       servers.nuke(uid)
         .then(function () {
-          vm.loadServers();
+          console.log("Server " + uid + " nuked.");
         })
         .catch(function (err) {
           console.error("ERROR: ", err);
         })
+    }
+
+    vm.clear = function(server){
+      logs.clear({name: server.spawnWith.env["LOG_PATH"] + '/' + server.spawnWith.env["LOG_FILE"], uid: server.uid})
+      .then(function(){
+        vm.logs[server.uid] = new Array();
+      })
+      .catch(function(err){
+        console.error(err);
+      });
     }
 
     vm.loadingLogs = {};
@@ -129,6 +138,8 @@
             });
           });
         });
+
+      $rootScope.$broadcast('location change', 'Servers');
     }
 
     init();

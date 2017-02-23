@@ -1,0 +1,29 @@
+<div ng-controller="ConfigController as vm" layout-fill>
+  <md-content>
+    <md-card>
+      <md-card-header md-colors="{'background': 'accent'}">
+        <md-card-header-text>Config</md-card-header-text>
+      </md-card-header>
+      <md-card-content>
+        <md-list>
+          <md-list-item class="md-1-line" ng-click="null" ng-repeat="server in vm.config">
+            <div layout-gt-md="row" layout-fill>
+              <span flex="40" style="font-family: monospace; color: black;"><b>uid:</b> {{server.uid}}<br><b>script:</b> {{server.script}}</span>
+              <span flex="10"><!-- spacer --></span>
+              <span flex="40" style="font-family: monospace; color: black;"><b>sourceDir:</b> {{server.sourceDir}}<br><b>command:</b> {{server.command}}</span>
+            </div>
+            <md-divider ></md-divider>
+          </md-list-item>
+        </md-list>
+        <md-card-actions layout="row" layout-align="center center">
+          <md-button class="md-raised md-primary">
+            <md-icon md-font-icon>clear_all</md-icon> Stop All Servers</md-button>
+          <md-button class="md-raised md-primary">
+            <md-icon md-font-icon>autorenew</md-icon> Restart All Servers</md-button>
+          <md-button class="md-raised md-primary">
+            <md-icon md-font-icon>add</md-icon> Add Server to Config</md-button>
+        </md-card-actions>
+      </md-card-content>
+    </md-card>
+  </md-content>
+</div>

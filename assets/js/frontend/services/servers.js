@@ -5,11 +5,55 @@
 (function(){
     'use strict';
 
-    angular.module('core')
+    angular.module('dataLayer')
     .factory('servers', ['$http', servers]);
 
     function servers($http){
         return {
+
+            /**
+             * Get the forever server config.
+             * Analagous to running less <config>
+             * @param configPath :: The location of the config
+             * @returns confgObj :: A JSON array of forever server configs
+             */
+            config: function(configPath){
+                return $http({
+                    method: 'post',
+                    dataType: 'json',
+                    url: '/server/config',
+                    data: {configPath: configPath}
+                })
+                .then(function(data){
+                    if(data.data) return data.data;
+                    else return [];
+                })
+                .catch(function(err){
+                    console.error('Error: ',err);
+                });
+            },
+
+            /**
+             * Adds a server config to the forever config file.
+             * @param configPath :: The path to the config file.
+             * @param server :: The config to add
+             * @returns confgObj :: A JSON array of forever server configs
+             */
+            addServer: function(configPath, server){
+                return $http({
+                    method: 'post',
+                    dataType: 'json',
+                    url: '/server/configAdd',
+                    data: {configPath: configPath, server: server}
+                })
+                .then(function(data){
+                    if(data.data) return data.data;
+                    else return [];
+                })
+                .catch(function(err){
+                    console.error('Error: ',err);
+                });
+            }, 
 
             /**
              * Get all running forever servers.
@@ -18,7 +62,7 @@
              * @param uid :: The forever UID that identifes the server
              * @returns A $http promise that returns an array of servers
              */
-            getAll: function(){
+            list: function(){
                 return $http({
                     method: 'get',
                     dataType: 'json',
@@ -28,6 +72,9 @@
                     if(data.data) return data.data;
                     else return [];
                 })
+                .catch(function(err){
+                    console.error('Error: ',err);
+                });
             },
 
             /**
@@ -74,6 +121,27 @@
             },
 
             /**
+             * Stops all running servers.
+             * Analagous to running `forever stopall`
+             * in the forever CLI.
+             * @returns A $http promise
+             */
+            stopall: function(){
+                return $http({
+                    method: 'post',
+                    dataType: 'json',
+                    url: '/server/stopall',
+                    data: {}
+                })
+                .then(function(data){
+                    console.log('Message: ', data.data);
+                })
+                .catch(function(err){
+                    console.error('Error: ',err);
+                });
+            },
+
+            /**
              * Restart the given server.
              * Analagous to running `forever restart <uid>`
              * in the forever CLI.
@@ -86,6 +154,27 @@
                     dataType: 'json',
                     url: '/server/restart',
                     data: {uid: uid}
+                })
+                .then(function(data){
+                    console.log('Message: ', data.data);
+                })
+                .catch(function(err){
+                    console.error('Error: ',err);
+                });
+            },
+
+            /**
+             * Restarts all running servers.
+             * Analagous to running `forever restartall`
+             * in the forever CLI.
+             * @returns A $http promise
+             */
+            restartall: function(){
+                return $http({
+                    method: 'post',
+                    dataType: 'json',
+                    url: 'server/restartall',
+                    data: {}
                 })
                 .then(function(data){
                     console.log('Message: ', data.data);

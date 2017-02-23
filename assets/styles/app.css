@@ -26,11 +26,13 @@
 /* Console Settings */
 .console {
     padding: 10px;
-    border: 2px solid darkgrey;
+    border: 5px ridge darkgrey;
     background: black;
-    max-height: 400px;
-    overflow: hidden;
-    overflow-y: auto;
+    box-shadow: darkgrey 5px 5px 5px;
+    min-height: 350px;
+    max-height: 350px;
+    margin: 5px;
+    overflow: auto;
 }
 
 .data {

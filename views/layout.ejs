@@ -33,9 +33,12 @@
     <link rel="stylesheet" href="/styles/app.css">
     <link rel="stylesheet" href="/styles/importer.css">
     <!--STYLES END-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
   </head>
 
   <body ng-app="core" layout-fill style="height:100vh; overflow: hidden;">
+    <tool-bar></tool-bar>
     <div ng-view layout-fill><!-- Views are inserted here --></div>
 
 
@@ -104,8 +107,13 @@
     <script src="/bower_components/angular-messages/angular-messages.js"></script>
     <script src="/bower_components/angular-scroll-glue/src/scrollglue.js"></script>
     <script src="/bower_components/angular-lodash/angular-lodash.js"></script>
+    <script src="/js/frontend/__dataLayer.js"></script>
+    <script src="/js/frontend/_ui.js"></script>
     <script src="/js/frontend/app.js"></script>
+    <script src="/js/frontend/controllers/ConfigController.js"></script>
     <script src="/js/frontend/controllers/HomeController.js"></script>
+    <script src="/js/frontend/controllers/ToolbarController.js"></script>
+    <script src="/js/frontend/directives/ToolbarDirective.js"></script>
     <script src="/js/frontend/services/logs.js"></script>
     <script src="/js/frontend/services/servers.js"></script>
     <!--SCRIPTS END-->

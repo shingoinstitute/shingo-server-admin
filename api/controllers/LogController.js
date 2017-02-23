@@ -76,11 +76,10 @@ module.exports = {
     sails.log.debug('logPath: ', logPath);
     
     sails.io.emit('server log', {timestamp: new Date(), level: 'info', message: "Clearing logs for " + uid + " at " + logPath});
-    fs.removeAsync(logPath)
+    fs.outputFileAsync(logPath, "")
     .then(function(){
       sails.io.emit('server log', {timestamp: new Date(), level: 'info', message: "Logs cleared for " + uid});
-      sails.io.emit(uid + " clear logs", {});
-      res.ok("File removed");
+      return res.ok("File removed");
     })
     .catch(function(err){
       sails.io.emit('server log', {timestamp: new Date(), level: 'error', message: JSON.stringify(err)});

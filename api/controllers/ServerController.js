@@ -21,9 +21,9 @@ module.exports = {
    * @returns configFile :: The JSON object representing the config file
    */
   config: function (req, res) {
-    var configPath = req.param("config");
+    var configPath = req.param("configPath");
     if (!configPath) return res.badRequest("No config parameter found.");
-    fs.readJsonAsyn(configPath)
+    fs.readJsonAsync(configPath)
       .then(function (config) {
         return res.ok(config);
       })
@@ -32,6 +32,25 @@ module.exports = {
         sails.io.emit('server log', {timestamp: new Date(), level: 'error', message: JSON.stringify(err)});
         return res.negotiate(err);
       });
+  },
+
+  configAdd: function(req, res){
+    var configPath = req.param("configPath");
+    var server = JSON.parse(req.param("server"));
+    rs.readJsonAsync(configPath).bind({})
+    .then(function(config){
+      config.push(server);
+      this.config = config;
+      return rs.writeJsonAsync(configPath);
+    })
+    .then(function(){
+      return res.created(this.config);
+    })
+    .catch(function(err){
+      sails.log.error(err);
+      sails.io.emit('server log', {timestamp: new Date(), level: 'error', message: JSON.stringify(err)});
+      return res.negotiate(err);
+    });
   },
 
   /**
@@ -260,7 +279,9 @@ module.exports = {
 
         // Emit messages on `npm install` stderr
         child.stderr.on('data', function (data) {
-          sails.io.emit('server log', {timestamp: new Date(), level: 'error', stack: data.toString()});
+          var i = data.toString().search("WARN");
+          if(data && data != "" && data != "\n")          
+            sails.io.emit('server log', {timestamp: new Date(), level: (i >= 0 ? 'warn' : 'error'), stack: data.toString()});
         })
 
         // (3) Restart server on `npm install` close
