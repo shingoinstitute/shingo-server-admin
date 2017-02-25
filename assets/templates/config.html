@@ -5,7 +5,7 @@
         <md-card-header-text>Config</md-card-header-text>
       </md-card-header>
       <md-card-content>
-        <md-list>
+        <md-list style="height: 300px; overflow:auto;">
           <md-list-item class="md-1-line" ng-click="null" ng-repeat="server in vm.config">
             <div layout-gt-md="row" layout-fill>
               <span flex="40" style="font-family: monospace; color: black;"><b>uid:</b> {{server.uid}}<br><b>script:</b> {{server.script}}</span>
@@ -23,6 +23,34 @@
           <md-button class="md-raised md-primary">
             <md-icon md-font-icon>add</md-icon> Add Server to Config</md-button>
         </md-card-actions>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header md-colors="{'background': 'accent'}">
+        <md-card-header-text>Start Server</md-card-header-text>
+      </md-card-header>
+      <md-card-content>
+        <h3 class="error">Server will not restart if droplet is restarted!!!!</h3>
+        <form name="serverForm" ng-cloak>
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>UID</label>
+            <input name="uid" type="text" minlength="4" maxlength="12" is-in="{{vm.config | pluck: 'uid'}}" required ng-model="vm.newServer.uid"/>
+            <div ng-messages="serverForm.uid.$error" ng-show="serverForm.uid.$dirty">
+              <div ng-message="required">
+                A UID is required for the server...
+              </div>
+              <div ng-message="minlength">
+                The UID must be at least 4 characters...
+              </div>
+              <div ng-message="maxlength">
+                The UID must be less than 12 characters...
+              </div>
+              <div ng-message="isin">
+                The UID must not be in use already...
+              </div>
+            </div>
+          </md-input-container>
+        </form>
       </md-card-content>
     </md-card>
   </md-content>

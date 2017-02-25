@@ -2,10 +2,11 @@
     'use strict';
 
     angular.module('ui', [
-        'dataLayer',            // Data Layer Factories
+        'dataLayer',       // Data Layer Factories
         'ngMaterial',      // Angular Material
         'angular-uuid',    // UUID generation
         'angular-lodash',  // Lodash directives
+        'ngMessages',      // Angular Messages
         'luegg.directives' // Scroll glue
     ])
     .config(function($mdThemingProvider){

@@ -1,0 +1,15 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+    "htmlhint.options": {
+        "doctype-first": false
+    },
+    "line-counter.excludes": [
+        "**/.vscode/**",
+        "**/test/**"
+    ],
+    "line-counter.includes": [
+        "api/**",
+        "assets/js/**",
+        "assets/templates/**"
+    ]
+}

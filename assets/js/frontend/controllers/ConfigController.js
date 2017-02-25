@@ -7,6 +7,7 @@
     function ConfigController($scope, $rootScope, servers){
         var vm = this;
         vm.config = [];
+        vm.newServer = {uid:""};
 
         function init(){
             servers.config('/var/www/servers.json')
