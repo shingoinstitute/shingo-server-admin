@@ -2,12 +2,12 @@
   <div class="md-toolbar-tools">
     <h2 flex md-truncate>{{vm.title}}</h2>
     <span flex><!-- spacer --></span>
-    <md-button ng-click="vm.go('/')" class="md-icon-button" aria-label="Servers">
+    <md-button ng-class="{active: vm.title == 'Servers'}" ng-click="vm.go('/')" class="md-icon-button" aria-label="Servers">
       <md-icon md-font-icon>computer</md-icon>
       <md-tooltip>Go to Servers</md-tooltip>
     </md-button>
 
-    <md-button ng-click="vm.go('/config')" class="md-icon-button" aria-label="Configure">
+    <md-button ng-class="{active: vm.title == 'Configurations'}" ng-click="vm.go('/config')" class="md-icon-button" aria-label="Configure">
       <md-icon md-font-icon>settings</md-icon>
       <md-tooltip>Go to Configs</md-tooltip>
     </md-button>

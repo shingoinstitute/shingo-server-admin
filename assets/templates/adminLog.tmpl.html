@@ -1,0 +1,16 @@
+<md-card>
+  <md-card-header md-colors="{'background': 'accent'}">
+    <md-card-header-text>Admin Log</md-card-header-text>
+  </md-card-header>
+  <md-card-content>
+    <div layout="column" flex layout-padding>
+      <div class="console" scroll-glue force-glue>
+        <span class="data" ng-repeat="log in adminLog">{{log.timestamp}} - <span class="{{log.level}}">{{log.level}}: </span>        {{log.message}} {{log.stack}}<br></span>
+      </div>
+      <md-button class="md-raised md-primary" ng-click="clearAdmin()">
+        <md-icon md-font-icon>clear_all</md-icon> Clear
+        <md-tooltip md-direction="top">Clear Admin Log</md-tooltip>
+      </md-button>
+    </div>
+  </md-card-content>
+</md-card>

@@ -4,7 +4,7 @@
   angular.module('ui')
     .controller('HomeController', ['$scope', '$rootScope', '$http', 'io', 'uuid', 'servers', 'logs', '_', HomeController]);
 
-  function HomeController($scope, $rootScope, $http, io, uuid, servers, logs) {
+  function HomeController($scope, $rootScope, $http, io, uuid, servers, logs, _) {
     var Log = function (jsonString) {
       var obj = JSON.parse(jsonString);
       this.timestamp = obj.timestamp;
@@ -15,17 +15,6 @@
     }
 
     var vm = this;
-    vm.adminLog = [];
-
-    io.socket.on('server log', function (data) {
-      vm.adminLog.push(data);
-      $scope.$apply();
-    });
-
-    vm.clearAdmin = function(){
-        vm.adminLog = [];
-    }
-
     vm.servers = [];
     vm.logs = {};
 
@@ -35,8 +24,10 @@
         .then(function (data) {
           vm.servers = data;
           vm.servers.forEach(function (s) {
+            console.log("server logs: ", vm.logs[s.uid]);
             if(!vm.logs[s.uid])
                 vm.logs[s.uid] = new Array();
+            console.log("server logs 2: ", vm.logs[s.uid].length);            
             loadLogs(s);
           })
         })
@@ -74,6 +65,7 @@
 
     // restart a server by UID
     vm.restart = function (uid) {
+      console.log("restart called")
       servers.restart(uid)
         .then(function () {
           console.log("Server " + uid + " restarted.");
@@ -120,7 +112,7 @@
             vm.logs[s.uid].push(new Log(l));
           });
           vm.loadingLogs[s.uid] = false;
-
+          console.log("server logs 3: ", vm.logs[s.uid].length);
         })
         .catch(function (err) {
           console.error("ERROR: ", err);

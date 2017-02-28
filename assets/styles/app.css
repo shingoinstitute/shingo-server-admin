@@ -29,8 +29,8 @@
     border: 5px ridge darkgrey;
     background: black;
     box-shadow: darkgrey 5px 5px 5px;
-    min-height: 350px;
-    max-height: 350px;
+    min-height: 325px;
+    max-height: 325px;
     margin: 5px;
     overflow: auto;
 }
@@ -44,6 +44,10 @@
 /* Misc. */
 md-tabs {
     height: 100%;
+}
+
+.active {
+    background: black;
 }
 
 .nuke {

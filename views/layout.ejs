@@ -37,10 +37,11 @@
       rel="stylesheet">
   </head>
 
-  <body ng-app="core" layout-fill style="height:100vh; overflow: hidden;">
+  <body ng-app="core" layout-fill style="height:100vh; overflow: auto;">
     <tool-bar></tool-bar>
     <div ng-view layout-fill><!-- Views are inserted here --></div>
 
+    <!-- LOG_PATH=/home/dustinehoman/Documents/lean-website/logs LOG_FILE=info.log -->
 
 
     <!--
@@ -110,10 +111,13 @@
     <script src="/js/frontend/__dataLayer.js"></script>
     <script src="/js/frontend/_ui.js"></script>
     <script src="/js/frontend/app.js"></script>
+    <script src="/js/frontend/controllers/AdminLogController.js"></script>
     <script src="/js/frontend/controllers/ConfigController.js"></script>
     <script src="/js/frontend/controllers/HomeController.js"></script>
     <script src="/js/frontend/controllers/ToolbarController.js"></script>
+    <script src="/js/frontend/directives/AdminLogDirective.js"></script>
     <script src="/js/frontend/directives/IsInDirective.js"></script>
+    <script src="/js/frontend/directives/MinArrDirective.js"></script>
     <script src="/js/frontend/directives/ToolbarDirective.js"></script>
     <script src="/js/frontend/services/logs.js"></script>
     <script src="/js/frontend/services/servers.js"></script>

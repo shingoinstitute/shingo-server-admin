@@ -149,6 +149,7 @@
              * @returns A $http promise
              */
             restart: function(uid){
+                console.log("Restarting")
                 return $http({
                     method: 'post',
                     dataType: 'json',

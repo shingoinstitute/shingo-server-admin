@@ -35,9 +35,14 @@
               </div>
           </md-card-content>
           <md-card-actions layout="row" layout-align="center center">
-            <md-button class="info" ng-click="vm.restart(server.uid)">Restart</md-button>
-            <md-button class="error" ng-click="vm.stop(server.uid)">Stop</md-button>
-            <md-button class="md-raised nuke" ng-click="vm.nuke(server.uid)"><span class="blink">Nuke</span></md-button>
+            <md-button class="info" ng-click="vm.restart(server.uid)">
+                <md-icon md-font-icon>replay</md-icon> Restart
+            </md-button>
+            <md-button class="error" ng-click="vm.stop(server.uid)">
+                <md-icon md-font-icon>stop</md-icon> Stop</md-button>
+            <md-button class="md-raised nuke" ng-click="vm.nuke(server.uid)">
+                <md-icon class="nuke" md-font-icon>whatshot</md-icon> <span class="blink">Nuke</span>
+            </md-button>
           </md-card-actions>
         </md-card>
         <div class="container" ng-show="vm.loadingLogs[s.uid]">
@@ -46,22 +51,29 @@
             <span>Loading server logs...</span>
           </div>
         </div>
-        <div layout-gt-md="row">
-            <div layout="column" flex-gt-md="50" layout-padding>
-                <b>{{server.uid}}'s Logs</b>
-                <div class="console" scroll-glue>
-                    <span class="data" ng-repeat="log in vm.logs[server.uid]">{{log.timestamp}} - <span class="{{log.level}}">{{log.level}}: </span>    {{log.message}} {{log.stack}}<br></span>
-                </div>
-                <md-button class="md-raised md-primary" ng-click="vm.clear(server)">Clear<md-tooltip md-direction="top">Clear Server Log</md-tooltip></md-button>
+        <div layout-gt-md="row" flex>
+            <div layout="column" flex>
+                <md-card>
+                    <md-card-header md-colors="{'background': 'accent'}">
+                        <md-card-header-text>{{server.uid}}'s Logs</md-card-header-text>
+                    </md-card-header>
+                    <md-card-content>
+                        <div layout="column" flex layout-padding>
+                            <div class="console" scroll-glue>
+                                <span class="data" ng-repeat="log in vm.logs[server.uid]">{{log.timestamp}} - <span class="{{log.level}}">{{log.level}}: </span>    {{log.message}} {{log.stack}}<br></span>
+                            </div>
+                            <md-button class="md-raised md-primary" ng-click="vm.clear(server)">
+                                <md-icon md-font-icon>clear_all</md-icon> Clear<md-tooltip md-direction="top">Clear Server Log</md-tooltip>
+                            </md-button>
+                        </div>
+                    </md-card-content>
+                </md-card>
             </div>
-            <div layout="column" flex layout-padding>
-                <b>Admin Log</b>
-                <div class="console" scroll-glue force-glue>
-                    <span class="data" ng-repeat="log in vm.adminLog">{{log.timestamp}} - <span class="{{log.level}}">{{log.level}}: </span>    {{log.message}} {{log.stack}}<br></span>          
-                </div>
-                <md-button class="md-raised md-primary" ng-click="vm.clearAdmin()">Clear<md-tooltip md-direction="top">Clear Admin Log</md-tooltip></md-button>
+            <div layout="column" flex>
+                <admin-log></admin-log>
             </div>
         </div>
+        <span flex="10"><!-- spacer --></span>
       </md-tab>
     </md-tabs>
   </md-content>
