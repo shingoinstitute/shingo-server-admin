@@ -1,20 +1,17 @@
-(function(){
-    'use strict';
+(function () {
+  'use strict';
 
-    angular.module('ui')
-    .controller('ToolbarController', ['$scope', '$rootScope', '$location', ToolbarController]);
+  angular.module('interface')
+    .controller('ToolbarController', ['$scope', ToolbarController]);
 
-    function ToolbarController($scope, $rootScope, $location){
-        var vm = this;
-        vm.title = "Shingo Server Admin"
-        $scope.$on("location change", function(ev, data){
-            vm.title = data;
-        });
+  function ToolbarController($scope) {
+    var vm = this;
+    vm.title = "Shingo Server Admin"
+    $scope.$on("location change", function (ev, data) {
+      vm.title = data;
+    });
 
-        vm.go = function(path){
-            $location.path(path);
-        }
-
-        $scope.vm = vm;
-    }
+    $scope.vm = vm;
+  }
+  
 })();

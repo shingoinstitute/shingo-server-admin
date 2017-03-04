@@ -1,7 +1,7 @@
 (function(){
     'use strict';
 
-    angular.module('ui')
+    angular.module('interface')
     .controller('AdminLogController', ['$scope', 'uuid', 'io', AdminLogController]);
 
     function AdminLogController($scope, uuid, io){
@@ -17,8 +17,8 @@
         $scope.adminLog = [];
 
         io.socket.on('server log', function (data) {
-        $scope.adminLog.push(data);
-            $scope.$apply();
+            $scope.adminLog.push(data);
+                $scope.$apply();
         });
 
         $scope.clearAdmin = function(){

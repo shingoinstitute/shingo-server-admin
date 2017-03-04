@@ -1,13 +1,14 @@
-(function(){
-    'use strict';
+(function () {
+  'use strict';
 
-    angular.module('ui')
-    .directive('adminLog', function(){
-        return {
-            restrict: 'EA',
-            templateUrl: 'templates/adminLog.tmpl.html',
-            controller: 'AdminLogController',
-            controllerAs: 'adminLog'
-        }
+  angular.module('interface')
+    .directive('adminLog', function () {
+      return {
+        restrict: 'EA',
+        templateUrl: 'templates/adminLog.tmpl.html',
+        controller: 'AdminLogController',
+        controllerAs: 'adminLog'
+      }
     });
+
 })();

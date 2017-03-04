@@ -28,7 +28,8 @@ var jsFilesToInject = [
   // Dependencies like jQuery, or Angular are brought in here
   'bower_components/lodash/dist/lodash.js',
   'bower_components/angular/angular.js',
-  'bower_components/angular-route/angular-route.js',
+  'bower_components/angular-ui-router/angular-ui-router.js',
+  // 'bower_components/angular-route/angular-route.js',
   'bower_components/angular-material/angular-material.js',
   'bower_components/angular-animate/angular-animate.js',
   'bower_components/angular-aria/angular-aria.js',

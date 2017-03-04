@@ -1,10 +1,10 @@
 (function(){
     'use strict';
 
-    angular.module('ui')
-    .controller('ConfigController', ['$scope', '$rootScope', 'servers', 'uuid', ConfigController]);
+    angular.module('interface')
+    .controller('ConfigController', ['$scope', '$rootScope', 'Server', 'Config', 'uuid', ConfigController]);
 
-    function ConfigController($scope, $rootScope, servers, uuid){
+    function ConfigController($scope, $rootScope, Server, Config, uuid){
         var vm = this;
         vm.config = [];
         vm.newServer = {
@@ -23,9 +23,10 @@
             });
             vm.newServer.env = envDict;
             console.log('Starting server:', vm.newServer);
-            servers.start(vm.newServer)
+            Server.start(vm.newServer)
             .then(function(data){
                 console.log("Server started...");
+                vm.newServer = {};
             })
             .catch(function(err){
                 console.error("ERROR: ", err);
@@ -33,7 +34,7 @@
         }
 
         vm.stopall = function(){
-            servers.stopall()
+            Server.stopall()
             .then(function(){
                 console.log("All servers stopped");
             })
@@ -43,7 +44,7 @@
         }
 
         vm.restartall = function(){
-            servers.restartall()
+            Server.restartall()
             .then(function(){
                 console.log("All servers restarted");
             })
@@ -53,7 +54,7 @@
         }
 
         function init(){
-            servers.config('/var/www/servers.json')
+            Config.config('/var/www/servers.json')
             .then(function(config){
                 vm.config = config;
             })
@@ -64,5 +65,9 @@
         }
 
         init();
+
+        $scope.$on('config removed', function(ev, data){
+            vm.config = vm.config.filter(function(el){ return el.uid !== data});
+        });
     }
 })();

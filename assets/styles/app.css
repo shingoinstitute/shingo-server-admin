@@ -42,8 +42,35 @@
 }
 
 /* Misc. */
+.login {
+    background: radial-gradient(slategray, #003768);
+    border-radius: 5px;
+    padding: 20px;
+    font-family: monospace;
+}
+
+.login .md-button {
+    text-transform: none;
+    font-size: 18pt;
+}
+
+.login .md-button .material-icons {
+    font-size: 200%;
+}
+
 md-tabs {
     height: 100%;
+}
+
+.md-tab {
+    text-transform: none;
+}
+
+md-list > .md-button {
+    width: 100%;
+    text-align: left;
+    text-transform: none;
+    margin: 0;
 }
 
 .active {

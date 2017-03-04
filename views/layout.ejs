@@ -38,8 +38,8 @@
   </head>
 
   <body ng-app="core" layout-fill style="height:100vh; overflow: auto;">
-    <tool-bar></tool-bar>
-    <div ng-view layout-fill><!-- Views are inserted here --></div>
+    <toolbar></toolbar>
+    <ui-view layout-fill><!-- Views are inserted here --></ui-view>
 
     <!-- LOG_PATH=/home/dustinehoman/Documents/lean-website/logs LOG_FILE=info.log -->
 
@@ -101,7 +101,7 @@
     <!--SCRIPTS-->
     <script src="/bower_components/lodash/dist/lodash.js"></script>
     <script src="/bower_components/angular/angular.js"></script>
-    <script src="/bower_components/angular-route/angular-route.js"></script>
+    <script src="/bower_components/angular-ui-router/angular-ui-router.js"></script>
     <script src="/bower_components/angular-material/angular-material.js"></script>
     <script src="/bower_components/angular-animate/angular-animate.js"></script>
     <script src="/bower_components/angular-aria/angular-aria.js"></script>
@@ -109,18 +109,30 @@
     <script src="/bower_components/angular-scroll-glue/src/scrollglue.js"></script>
     <script src="/bower_components/angular-lodash/angular-lodash.js"></script>
     <script src="/js/frontend/__dataLayer.js"></script>
-    <script src="/js/frontend/_ui.js"></script>
+    <script src="/js/frontend/_interface.js"></script>
     <script src="/js/frontend/app.js"></script>
     <script src="/js/frontend/controllers/AdminLogController.js"></script>
     <script src="/js/frontend/controllers/ConfigController.js"></script>
     <script src="/js/frontend/controllers/HomeController.js"></script>
+    <script src="/js/frontend/controllers/ServerConfigController.js"></script>
     <script src="/js/frontend/controllers/ToolbarController.js"></script>
     <script src="/js/frontend/directives/AdminLogDirective.js"></script>
+    <script src="/js/frontend/directives/ContextMenuDirective.js"></script>
     <script src="/js/frontend/directives/IsInDirective.js"></script>
     <script src="/js/frontend/directives/MinArrDirective.js"></script>
+    <script src="/js/frontend/directives/NgRightClickDirective.js"></script>
+    <script src="/js/frontend/directives/ServerConfigDirective.js"></script>
     <script src="/js/frontend/directives/ToolbarDirective.js"></script>
-    <script src="/js/frontend/services/logs.js"></script>
-    <script src="/js/frontend/services/servers.js"></script>
+    <script src="/js/frontend/factories/Access.js"></script>
+    <script src="/js/frontend/factories/Auth.js"></script>
+    <script src="/js/frontend/factories/Config.js"></script>
+    <script src="/js/frontend/factories/configs.js"></script>
+    <script src="/js/frontend/factories/Log.js"></script>
+    <script src="/js/frontend/factories/logs.js"></script>
+    <script src="/js/frontend/factories/Server.js"></script>
+    <script src="/js/frontend/factories/servers.js"></script>
+    <script src="/js/frontend/factories/User.js"></script>
+    <script src="/js/frontend/services/Auth.js"></script>
     <!--SCRIPTS END-->
     <script src="/bower_components/angular-uuid/angular-uuid.js"></script>
   </body>

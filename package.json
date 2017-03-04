@@ -5,6 +5,7 @@
   "description": "a Sails application",
   "keywords": [],
   "dependencies": {
+    "angular-ui-router": "^0.4.2",
     "angular-uuid": "0.0.4",
     "bluebird": "^3.4.7",
     "connect-redis": "^3.2.0",
