@@ -24,6 +24,7 @@
         .then(function (data) {
           vm.servers = data;
           vm.servers.forEach(function (s) {
+            console.debug('server ' + s.uid, s);
             if (!vm.logs[s.uid])
               vm.logs[s.uid] = new Array();
             loadLogs(s);
@@ -123,7 +124,7 @@
     function loadLogs(s) {
       vm.loadingLogs[s.uid] = true;
       Log.load({
-          name: s.spawnWith.env["LOG_PATH"] + '/' + s.spawnWith.env["LOG_FILE"],
+          name: s.spawnWith.env["LOG_PATH"] + '/' + s.args[0],
           uid: s.uid
         })
         .then(function (log) {

@@ -29,7 +29,17 @@ module.exports = {
 
     sails.io.emit('server log', {timestamp: new Date(), level: 'info', message: "Loading logs for " + uid + " at " + logPath});
     // Start a tail
-    var tail = new Tail(logPath);
+    var tail
+    
+    try
+    {
+      tail = new Tail(logPath);
+    }
+    catch(err)
+    {
+      sails.io.emit('server log', {timestamp: new Date(), level: 'error', message: JSON.stringify(err)});
+      sails.log.error("Tail error: ", err);
+    }
 
     tail.on("line", function(line){
       sails.io.emit(uid + " log line", line);
