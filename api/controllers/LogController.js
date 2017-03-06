@@ -26,15 +26,12 @@ module.exports = {
     var logPath = path.normalize(name);
     var loc = logPath.length - logPath.search('\\.log');
     if(loc != 4) return res.badRequest("Need a file that ends in .log. Not " + loc + "\n" + logPath);
-    sails.log.debug('uid: ', uid);
-    sails.log.debug('logPath: ', logPath);
 
     sails.io.emit('server log', {timestamp: new Date(), level: 'info', message: "Loading logs for " + uid + " at " + logPath});
     // Start a tail
     var tail = new Tail(logPath);
 
     tail.on("line", function(line){
-      sails.log.debug("Logs: ", line);
       sails.io.emit(uid + " log line", line);
     });
 
@@ -72,15 +69,12 @@ module.exports = {
     var logPath = path.normalize(name);
     var loc = logPath.length - logPath.search('\\.log');
     if(loc != 4) return res.badRequest("Need a file that ends in .log. Not " + loc + "\n" + logPath);
-    sails.log.debug('uid: ', uid);
-    sails.log.debug('logPath: ', logPath);
     
     sails.io.emit('server log', {timestamp: new Date(), level: 'info', message: "Clearing logs for " + uid + " at " + logPath});
-    fs.removeAsync(logPath)
+    fs.outputFileAsync(logPath, "")
     .then(function(){
       sails.io.emit('server log', {timestamp: new Date(), level: 'info', message: "Logs cleared for " + uid});
-      sails.io.emit(uid + " clear logs", {});
-      res.ok("File removed");
+      return res.ok("File removed");
     })
     .catch(function(err){
       sails.io.emit('server log', {timestamp: new Date(), level: 'error', message: JSON.stringify(err)});

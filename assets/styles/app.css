@@ -1,13 +1,38 @@
-.info {
-    color: forestgreen;
+/* npm log colors */
+.silly {
+    color: hotpink;
 }
 
 .debug {
     color: cadetblue;
 }
 
+.verbose {
+    color: mediumpurple;
+}
+
+.info {
+    color: forestgreen;
+}
+
+.warn {
+    color: darkgoldenrod;
+}
+
 .error {
     color: darkred;
+}
+
+/* Console Settings */
+.console {
+    padding: 10px;
+    border: 5px ridge darkgrey;
+    background: black;
+    box-shadow: darkgrey 5px 5px 5px;
+    min-height: 325px;
+    max-height: 325px;
+    margin: 5px;
+    overflow: auto;
 }
 
 .data {
@@ -16,8 +41,40 @@
     color: white;
 }
 
+/* Misc. */
+.login {
+    background: radial-gradient(slategray, #003768);
+    border-radius: 5px;
+    padding: 20px;
+    font-family: monospace;
+}
+
+.login .md-button {
+    text-transform: none;
+    font-size: 18pt;
+}
+
+.login .md-button .material-icons {
+    font-size: 200%;
+}
+
 md-tabs {
     height: 100%;
+}
+
+.md-tab {
+    text-transform: none;
+}
+
+md-list > .md-button {
+    width: 100%;
+    text-align: left;
+    text-transform: none;
+    margin: 0;
+}
+
+.active {
+    background: black;
 }
 
 .nuke {
@@ -26,6 +83,7 @@ md-tabs {
     font-weight: bolder;
 }
 
+/* Loading bar */
 .container {
   display: block;
   position: relative;
@@ -47,6 +105,8 @@ md-tabs {
   padding: 25px;
   font-size: 0.9em; }
 
+
+/* Replicate text-decoration: blink in CSS3 */
 @keyframes blink {  
   0% { opacity: 1.0; }
   50% { opacity: 0.0; }
@@ -57,16 +117,8 @@ md-tabs {
   50% { opacity: 0.0; }
   100% { opacity: 1.0; }
 }
+
 .blink {
   animation: blink 1s step-start 0s infinite;
   -webkit-animation: blink 1s step-start 0s infinite;
 } 
-
-.console {
-    padding: 10px;
-    border: 2px solid darkgrey;
-    background: black;
-    max-height: 400px;
-    overflow: hidden;
-    overflow-y: auto;
-}

@@ -58,6 +58,7 @@ module.exports.http = {
       passport.use(new ForceDotComStrategy(
         sails.config.passport.forcedotcom.options,
         function(token, tokenSecret, profile, done){
+          profile.access_token = token.params;
           return done(null, profile);
         }
       ));

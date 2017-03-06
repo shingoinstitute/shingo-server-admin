@@ -1,0 +1,98 @@
+<div ng-controller="ConfigController as vm" layout-fill>
+  <md-content>
+    <div layout-gt-md="row">
+      <md-card flex>
+        <md-card-header md-colors="{'background': 'accent'}">
+          <md-card-header-text>Config</md-card-header-text>
+        </md-card-header>
+        <md-card-content>
+          <md-list style="height: 300px; overflow:auto;">
+            <md-list-item flex class="md-2-line md-clickable" md-ink-ripple md-button md-no-style ng-repeat="server in vm.config">
+              <server-config server="server" flex></server-config>
+              <md-divider ></md-divider>
+          </md-list-item>
+          </md-list>
+          <md-card-actions layout="row" layout-align="center center">
+            <md-button class="md-raised md-primary" ng-click="vm.stopall()">
+              <md-icon md-font-icon>clear_all</md-icon> Stop All Servers
+            </md-button>
+            <md-button class="md-raised md-primary" ng-click="vm.restartall()">
+              <md-icon md-font-icon>autorenew</md-icon> Restart All Servers
+            </md-button>
+            <!--<md-button class="md-raised md-primary">
+              <md-icon md-font-icon>add</md-icon> Add Server to Config
+            </md-button>-->
+          </md-card-actions>
+        </md-card-content>
+      </md-card>
+      <span flex="5"><!-- spacer --></span>
+      <admin-log flex></admin-log>
+    </div>
+    <md-card>
+      <md-card-header md-colors="{'background': 'accent'}">
+        <md-card-header-text>Start Server</md-card-header-text>
+      </md-card-header>
+      <md-card-content>
+        <strong class="error">Server will not restart if droplet is restarted!!!!</strong>
+        <form name="serverForm" ng-cloak flex>
+            <div layout-gt-md="row" flex>
+              <md-input-container class="md-block" flex-gt-sm>
+                <label>UID</label>
+                <input name="uid" type="text" minlength="2" maxlength="36" is-in="{{vm.config | pluck: 'uid'}}" required ng-model="vm.newServer.uid"/>
+                <div ng-messages="serverForm.uid.$error" ng-show="serverForm.uid.$dirty">
+                  <div ng-message="required">
+                    A UID is required for the server...
+                  </div>
+                  <div ng-message="minlength">
+                    The UID must be at least 2 characters...
+                  </div>
+                  <div ng-message="maxlength">
+                    The UID must be less than 37 characters...
+                  </div>
+                  <div ng-message="isin">
+                    The UID must not be in use already...
+                  </div>
+                </div>
+              </md-input-container>
+              <md-input-container class="md-block" flex-gt-sm>
+                <label>File</label>
+                <input name="file" type="text" pattern="^.*\.(js|json)$" required ng-model="vm.newServer.file" />
+                <div ng-messages="serverForm.file.$error" ng-show="serverForm.file.$dirty">
+                  <div ng-message="required">
+                    A script to start is required...
+                  </div>
+                  <div ng-message="pattern">
+                    The file to start must be a .js script or forever JSON config...
+                  </div>
+                </div>
+              </md-input-container>
+            </div>
+            <span flex="5"><!-- spacer --></span>
+            <div layout-gt-md="row" flex>
+              <md-input-container class="md-block" flex-gt-sm>
+                <label>Source Directory</label>
+                <input name="source" type="text" ng-model="vm.newServer.source">
+              </md-input-container>
+              <div layout="column" flex>
+                <md-chips ng-model="vm.newServer.env" name="env" placeholder="ENV=value" readonly="false" min-arr="3" required></md-chips>
+                <br>
+                <div class="error" ng-show="serverForm.env.$error">
+                  <div ng-show="serverForm.env.$error.required">
+                    Must have at least three env variables, namely LOG_PATH, LOG_FILE, and PORT...
+                  </div>
+                  <div ng-show="serverForm.env.$error.minarr">
+                    Must have at least three env variables, namely LOG_PATH, LOG_FILE, and PORT...
+                  </div>
+                </div>
+              </div>
+            </div>
+          <div layout="row" layout-align="center center">
+            <md-button flex ng-disabled="serverForm.$invalid" class="md-raised md-primary" ng-click="vm.start()">
+              <md-icon md-font-icon>play_circle_outline</md-icon> Start
+            </md-button>
+          </div>
+        </form>
+      </md-card-content>
+    </md-card>
+  </md-content>
+</div>
