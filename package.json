@@ -1,11 +1,19 @@
 {
   "name": "shingo-server-admin",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "a Sails application",
   "keywords": [],
   "dependencies": {
+    "angular-ui-router": "^0.4.2",
+    "angular-uuid": "0.0.4",
+    "bluebird": "^3.4.7",
+    "connect-redis": "^3.2.0",
+    "cookie-parser": "^1.4.3",
     "ejs": "2.3.4",
+    "forever": "^0.15.3",
+    "forever-monitor": "^1.7.1",
+    "fs-extra": "^2.0.0",
     "grunt": "1.0.1",
     "grunt-contrib-clean": "1.0.0",
     "grunt-contrib-coffee": "1.0.0",
@@ -19,9 +27,13 @@
     "grunt-sails-linker": "~0.10.1",
     "grunt-sync": "0.5.2",
     "include-all": "^1.0.0",
+    "lodash": "^4.17.4",
+    "passport": "^0.3.2",
+    "passport-forcedotcom": "^0.1.4",
     "rc": "1.0.1",
     "sails": "~0.12.11",
-    "sails-disk": "~0.10.9"
+    "sails-disk": "~0.10.9",
+    "tail": "^1.2.1"
   },
   "scripts": {
     "debug": "node debug app.js",

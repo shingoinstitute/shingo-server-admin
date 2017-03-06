@@ -1,0 +1,70 @@
+<form name="serverConfigForm" layout-gt-md="row" layout-fill>
+<md-menu context-menu flex layout-fill>
+    <md-button style="display: none;"></md-button>
+    <md-menu-content width="4" ng-mouseleave="$mdMenu.close()">
+        <md-menu-item ng-show="!isEditing">
+            <md-button ng-click="isEditing = true">
+                <md-icon md-font-icon>edit</md-icon> Edit
+            </md-button>
+        </md-menu-item>
+        <md-menu-item ng-show="isEditing">
+            <md-button ng-click="isEditing = false">
+                <md-icon md-font-icon>cancel</md-icon> Cancel
+            </md-button>
+        </md-menu-item>
+        <md-menu-item ng-show="isEditing">
+            <md-button ng-disabled="serverConfigForm.$invalid" ng-click="isEditing = false; saveServer();">
+                <md-icon md-font-icon>save</md-icon> Save
+            </md-button>
+        </md-menu-item>
+        <md-menu-item>
+            <md-button ng-click="removeConfig()">
+                <md-icon md-font-icon>delete</md-icon> Remove
+            </md-button>
+        </md-menu-item>
+    </md-menu-content>
+    <div ng-show="!isEditing" layout-gt-md="row" layout-fill ng-right-click="$mdOpenContextMenu($event)">
+        <span flex="40" style="font-family: monospace; color: black;"><b>uid:</b> {{server.uid}}<br><b>script:</b> {{server.script}}</span>
+        <span flex="10"><!-- spacer --></span>
+        <span flex="40" style="font-family: monospace; color: black;"><b>sourceDir:</b> {{server.sourceDir}}<br><b>command:</b> {{server.command}}</span>
+    </div>
+    <div ng-show="isEditing" layout-fill ng-right-click="$mdOpenContextMenu($event)" flex>
+        <div layout-fill layout-gt-md="row">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>UID</label>
+                <input type="text" name="uid" ng-model="server.uid" required minlength="2" maxlength="37" />
+                <div ng-messages="serverConfigForm.uid.$error" ng-show="serverConfigForm.uid.$dirty">
+                    <div ng-message="required">
+                        A uid is required...
+                    </div>
+                    <div ng-message-exp="['minlength', 'maxlength']">
+                        UID length must be >= 2 and < 37...
+                    </div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block" flex>
+                <label>Script</label>
+                <input type="text" name="script" ng-model="server.script" required pattern="^.*\.(js|json)" />
+                <div ng-messages="serverConfigForm.script.$error" ng-show="serverConfigForm.script.$dirty">
+                    <div ng-message="required">
+                        A script is required...
+                    </div>
+                    <div ng-message="pattern">
+                        Script must be JS or JSON file...
+                    </div>
+                </div>
+            </md-input-container>
+        </div>
+        <div layout-fill layout-gt-md="row">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Source Dir</label>
+                <input type="text" name="sourceDir" ng-model="server.sourceDir" />
+            </md-input-container>
+            <md-input-container class="md-block" flex>
+                <label>Command</label>
+                <input type="text" name="script" ng-model="server.command" />
+            </md-input-container>
+        </div>
+    </div>
+    </form>
+</md-menu>
