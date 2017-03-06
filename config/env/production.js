@@ -25,14 +25,25 @@ module.exports = {
    * Set the port in the production environment to 80                        *
    ***************************************************************************/
 
-  // port: 80,
+  port: 5000,
 
   /***************************************************************************
    * Set the log level in production environment to "silent"                 *
    ***************************************************************************/
 
-  // log: {
-  //   level: "silent"
-  // }
+  log: {
+    level: "info"
+  },
+
+  proxyHost: 'https://admin.shingo.org',
+  proxyPort: 80,
+
+  session: {
+    adapter: 'redis'
+  },
+
+  grunt: {
+    _hookTimeout: 5000000
+  }
 
 };

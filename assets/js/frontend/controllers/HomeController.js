@@ -145,7 +145,7 @@
           vm.servers.forEach(function (s, i) {
             console.debug("Listening for logs for server " + s.uid);
             io.socket.on(s.uid + ' log line', function (line) {
-              vm.logs[s.uid].push(new Log(line));
+              vm.logs[s.uid].push(new $Log(line));
               $scope.$apply();
             });
           });

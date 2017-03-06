@@ -17,7 +17,7 @@
         $scope.adminLog = [];
 
         io.socket.on('server log', function (data) {
-            $scope.adminLog.push(data);
+            $scope.adminLog.push(new Log(data));
                 $scope.$apply();
         });
 
