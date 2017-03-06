@@ -11,5 +11,6 @@
         "api/**",
         "assets/js/**",
         "assets/templates/**"
-    ]
+    ],
+    "editor.minimap.enabled": true
 }
